@@ -5,4 +5,4 @@ if [ $# != 1 ]; then
     exit 1
 fi
 
-aws ec2 describe-availability-zones --region "$1" | jq -r '.AvailabilityZones[] | .ZoneId + "=" + .ZoneName'
+aws ec2 describe-availability-zones --region "$1" --query 'AvailabilityZones[].[ZoneId, ZoneName]' --output text
